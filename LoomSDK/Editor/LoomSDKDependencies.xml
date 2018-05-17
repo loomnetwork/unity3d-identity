@@ -51,9 +51,9 @@
            generated Xcode project.  This is "true" by default.
          * "minTargetSdk" (optional)
            The minimum iOS SDK required by this Cocoapod. -->
-    <!--
-    <iosPod name="Google-Mobile-Ads-SDK" version="~> 7.0" bitcodeEnabled="true"
-            minTargetSdk="6.0">-->
+
+    <!--iosPod name="Auth0" version="~> 1.0" bitcodeEnabled="false"
+            minTargetSdk="9.0">-->
       <!-- Set of source URIs to search for this Cocoapod spec.
            By default Cocoapods will attempt to fetch the pod specs from:
            * $HOME/.cocoapods/repos
@@ -62,6 +62,6 @@
       <!--<sources>
         <source>https://github.com/CocoaPods/Specs</source>
       </sources>
-    </iosPod>-->
+    </iosPod-->
   </iosPods>
 </dependencies>
