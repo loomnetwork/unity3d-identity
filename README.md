@@ -23,8 +23,7 @@ can use the associated private key to sign and then commit transactions using `L
 ## Authorization Flows
 
 To obtain a `Identity` you must first obtain an access token from Auth0, the exact process
-depends on the platform. Currently the process has only be implemented on desktop platforms,
-mobile platforms are TBD.
+depends on the platform.
 
 ### Desktop Windows / Mac / Linux
 
@@ -90,17 +89,6 @@ iOS build scripts adds following changes to the Xcode project, make sure to upda
     Objective C and Swift source files in Library/LoomSDK/iOS/
 
 
-## Adding new transaction types
-
-Create a new `.proto` file in the `Assets\Protobuf` directory, refer to [Google Protocol Buffers](https://developers.google.com/protocol-buffers/docs/csharptutorial) for syntax details etc.
-You'll need to download the [`protoc` compiler](https://github.com/google/protobuf/releases) to
-generate C# classes from the `.proto` files.
-
-The relevant command will look something like this:
-```cmd
-protoc -I<install path>/protoc-3.5.1/include -I<project path>/Assets/Protobuf --csharp_out=<project path>/Assets/Protobuf <project path>/Assets/Protobuf/MyTransactions.proto
-```
-
 ## Samples
 
 
@@ -131,7 +119,18 @@ from `src/Auth0.AuthenticationApi/bin/Release/net46` to the Unity project.
 Build from source https://github.com/CodesInChaos/Chaos.NaCl - then copy the build assemblies from
 `Chaos.NaCl/Chaos.NaCl/bin/Release` to `Assets/Plugins`.
 
-### Google Protocol Buffers
 
-Install prebuilt [Google.Protobuf 3.5](https://www.nuget.org/packages/Google.Protobuf) from NuGet
-and copy them to `Assets/Plugins`.
+## Unity package build scripts
+
+build.cmd - Windows script that builds unity package with content from Assets directory
+build.sh - OSX/Linux script that builds unity package with content from Assets directory
+
+Both scripts use UNITY_PATH variable as path to Unity. 
+For default installation it should point to :
+    '/Applications/Unity/Unity.app/Contents/MacOS/Unity' - OSX
+    'C:\Program Files\Unity\Editor\Unity.exe' - Windows
+    
+    
+    
+
+

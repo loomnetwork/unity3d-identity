@@ -1,9 +1,0 @@
-syntax = "proto3";
-
-message SampleQueryParams {
-    string body = 1;
-}
-
-message SampleQueryResult {
-    string body = 1;
-}

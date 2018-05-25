@@ -101,23 +101,5 @@ public class authSample : MonoBehaviour
         var authClient = this.CreateAuthClient();
         await authClient.ClearIdentityAsync();
     }
-
-    public async void ResetPrivateKey()
-    {
-
-    }
-
-    public async void CallContract()
-    {
-      }
-
-    public async void CallContractWithResult()
-    {
-
-    }
-
-    public async void StaticCallContract()
-    {
- 
-    }
+		
 }
