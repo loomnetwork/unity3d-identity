@@ -32,7 +32,7 @@ namespace UnitySwift {
 				proj.SetBuildProperty(targetGuid, "SWIFT_VERSION", "3.0");
 
 				//frameworks
-				DirectoryInfo projectParent = Directory.GetParent(Application.dataPath);
+				/*DirectoryInfo projectParent = Directory.GetParent(Application.dataPath);
 				char divider = Path.DirectorySeparatorChar;
 				var frameworksPath = "Frameworks/LoomSDK/Frameworks";
 				if (PlayerSettings.iOS.sdkVersion == iOSSdkVersion.SimulatorSDK) {
@@ -57,7 +57,8 @@ namespace UnitySwift {
 					proj.AddFrameworkToProject (targetGuid, file.Name, false);
 					PBXProjectExtensions.AddFileToEmbedFrameworks(proj, targetGuid, fileGuid);
 
-				}
+				}*/
+
                 proj.WriteToFile(projPath);
 				//info.plist
 				var plistPath = buildPath+ "/Info.plist";
@@ -73,6 +74,33 @@ namespace UnitySwift {
 				dic.SetString ("CFBundleURLName", "auth0");
 				// Write plist
 				File.WriteAllText(plistPath, plist.WriteToString());
+				//Pod file
+				string strPodContent="platform :ios, '9.0'\ninhibit_all_warnings!\nuse_frameworks!\n\ntarget 'Unity-iPhone' do\n pod 'Auth0', '~> 1.5'\nend\n";
+				File.WriteAllText(buildPath+"/Podfile", strPodContent);
+				//Run CocoaPods
+				try{
+				Process podProcess = new Process();
+				podProcess.StartInfo.FileName = "/usr/local/bin/pod";
+				podProcess.StartInfo.Arguments="install";
+				podProcess.StartInfo.RedirectStandardError = true;
+				podProcess.StartInfo.RedirectStandardOutput = true;
+				podProcess.StartInfo.UseShellExecute = false;
+				podProcess.StartInfo.WorkingDirectory = buildPath;
+				podProcess.OutputDataReceived += new DataReceivedEventHandler((s, e) => 
+					{ 
+					//	UnityEngine.Debug.Log(e.Data); 
+					}
+				);
+				podProcess.ErrorDataReceived += new DataReceivedEventHandler((s, e) =>
+					{
+							//UnityEngine.Debug.Log(e.Data); 
+					}
+				);
+				podProcess.Start();
+				podProcess.BeginOutputReadLine ();
+				podProcess.WaitForExit ();
+				}catch(System.Exception){throw new UnityException("Cocoapods required to install Auth0 library. Please install it");}
+
             }
         }
     }
