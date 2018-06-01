@@ -99,7 +99,9 @@ namespace UnitySwift {
 				podProcess.Start();
 				podProcess.BeginOutputReadLine ();
 				podProcess.WaitForExit ();
-				}catch(System.Exception){throw new UnityException("Cocoapods required to install Auth0 library. Please install it");}
+				}catch(System.Exception){
+					UnityEngine.Debug.LogWarning("Cocoapods required to install Auth0 library. Please install it or run manually \"pod install\" in the Xcode project directory");
+				}
 
             }
         }
