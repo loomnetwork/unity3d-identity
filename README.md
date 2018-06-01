@@ -10,7 +10,7 @@ The SDK currently supports the following Unity targets:
 
 ## Requirements
 
-- Unity 2017.3 or later.
+- Unity 2017.4.1 or later.
 - `Build Settings` -> `Player Settings` -> `Configuration` set as follows:
 - `Scripting Runtime Version`: `Experimental (.NET 4.6 Equivalent)`
 - `API Compatibility Level`: `.NET 4.6`
