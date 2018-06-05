@@ -6,7 +6,7 @@ The SDK currently supports the following Unity targets:
 - Desktop Win/MacOS/Linux
 - Android
 - iOS
-
+- WebGL
 
 ## Requirements
 
@@ -27,7 +27,7 @@ depends on the platform.
 
 ### Desktop Windows / Mac / Linux
 
-`AuthClient` will wait for an HTTP request on `http://127.0.0.1:9999/auth/auth0/`, then it will
+`AuthClient` will wait for an HTTP request on `http://127.0.0.1:9998/auth/auth0/`, then it will
 open a new browser window and load the Auth0 sign-in page (using the default system web browser).
 At this point the user should be directed to switch to the browser to sign-in, when they do so
 successfully Auth0 will redirect to the aforementioned URL, and `AuthClient` will fetch or
@@ -68,35 +68,33 @@ signs in the browser will redirect the user back to the Unity app. `AuthClient` 
 or create a `Identity`.
 
 Requirements:
+- iOS 9 or later
+- Xcode 8
+- Swift 3.0
+- SimpleKeychain & Auth0 frameworks (currently installed via Cocoa Pods)
 
-    iOS 9 or later
-    Xcode 8
-    Swift 3.0
-    SimpleKeychain framework
-    Auth0 framework
+Set the mimium target SDK to 9.0 in Unity iOS Player settings before building for the iOS platform.
 
-Set the mimium target SDK to 9.0 in Player settings befor building for iOS platform
-
-iOS build scripts adds following changes to the Xcode project, make sure to update it if you use a custom project :
-
-    Swift bridging header : Libraries/LoomSDK/ios/LoomSDKSwift-Bridging-Header.h
-    Swift prebuild header: LoomSDKSwift.h
-    Swift version - 3.0
-    Simplekeychain prebuilt framework
-    Auth0 prebuilt framework
-    Custom handler for application:openUrl for Unity application 
-    Custom URL Scheme with "Auth0" as name and "$PRODUCT_BUNDLE_ID" as scheme in info.plist
-    Objective C and Swift source files in Library/LoomSDK/iOS/
+iOS build scripts makes the following changes to the Unity-generated Xcode project, if you want to
+use a custom project file you'll need to:
+- Add the Swift bridging header `Libraries/LoomSDK/ios/LoomSDKSwift-Bridging-Header.h`
+- Add the Swift prebuild header `LoomSDKSwift.h`
+- Use Swift version - 3.0
+- Add Simplekeychain & Auth0 prebuilt frameworks
+- Add a custom handler for `application:openUrl` for the Unity application 
+- Specify a Custom URL Scheme with `Auth0` as the name, and `$PRODUCT_BUNDLE_ID` as the scheme in
+  `info.plist`
+- Add the Objective C and Swift source files from `Library/LoomSDK/iOS/`
 
 
 ## Samples
 
-
 When you run the sample scene you will see two buttons that are hooked up to call the
-corresponding methods in `Assets/authSample.cs`, these must be pressed in the correct order:
+corresponding methods in `Assets/LoomSDK/Auth/authSample.cs`, these must be pressed in the correct order:
 1. Press the `Sign In` button, this should open a new browser window, once you've signed up/in
 you should see the text above the button change to `Signed in as ...`.
-3. You can press the `Sign Out` button after signing in to delete user identity. 
+2. You can press the `Sign Out` button after signing in to sign out, this will clear out the key
+pair associated with the currentl identity (note this is currently only implemented in WebGL buidls).
 
 ## Dependencies
 
@@ -122,13 +120,13 @@ Build from source https://github.com/CodesInChaos/Chaos.NaCl - then copy the bui
 
 ## Unity package build scripts
 
-build.cmd - Windows script that builds unity package with content from Assets directory
-build.sh - OSX/Linux script that builds unity package with content from Assets directory
+- `build.cmd` - Windows script that builds a Unity package with content from `Assets` directory.
+- `build.sh` - MacOS/Linux script that builds a Unity package with content from `Assets` directory
 
-Both scripts use UNITY_PATH variable as path to Unity. 
-For default installation it should point to :
-    '/Applications/Unity/Unity.app/Contents/MacOS/Unity' - OSX
-    'C:\Program Files\Unity\Editor\Unity.exe' - Windows
+Both scripts use `UNITY_PATH` variable to launch Unity.
+By default Unity is installed to:
+- `/Applications/Unity/Unity.app/Contents/MacOS/Unity` on MacOS
+- `C:\Program Files\Unity\Editor\Unity.exe` on Windows
     
     
     
