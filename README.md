@@ -1,3 +1,8 @@
+# Deprecated Repository
+
+This repository is **deprecated and no longer maintained**. Head over to
+[this page](https://loomx.io/developers/docs/en/join-testnet.html) to find out how you can join the Loom PlasmaChain Testnet.
+
 # Loom Network SDK for Unity3d
 
 This repo contains the SDK code and a **Unity 2017.3** project that provides examples.
@@ -81,7 +86,7 @@ use a custom project file you'll need to:
 - Add the Swift prebuild header `LoomSDKSwift.h`
 - Use Swift version - 3.0
 - Add Simplekeychain & Auth0 prebuilt frameworks
-- Add a custom handler for `application:openUrl` for the Unity application 
+- Add a custom handler for `application:openUrl` for the Unity application
 - Specify a Custom URL Scheme with `Auth0` as the name, and `$PRODUCT_BUNDLE_ID` as the scheme in
   `info.plist`
 - Add the Objective C and Swift source files from `Library/LoomSDK/iOS/`
@@ -127,8 +132,3 @@ Both scripts use `UNITY_PATH` variable to launch Unity.
 By default Unity is installed to:
 - `/Applications/Unity/Unity.app/Contents/MacOS/Unity` on MacOS
 - `C:\Program Files\Unity\Editor\Unity.exe` on Windows
-    
-    
-    
-
-
